@@ -122,7 +122,7 @@ export default function QuestionnaireChooser() {
           <p className="text-sm text-gray-500 mb-1">Don&apos;t see your industry?</p>
           <p className="text-xs text-gray-400">
             We&apos;re adding new verticals all the time. Email{" "}
-            <a href="mailto:hello@staticco.net" className="text-blue-600 hover:underline">hello@staticco.net</a>
+            <a href="mailto:team@staticco.net" className="text-blue-600 hover:underline">team@staticco.net</a>
             {" "}and tell us what you do — yours might be next.
           </p>
         </div>

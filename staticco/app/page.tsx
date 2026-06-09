@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect, useRef } from "react";
 
 // ─── Orbit Logo ─────────────────────────────────────────────────────────────
@@ -518,7 +516,7 @@ export default function StaticCoLanding() {
         <footer className="bg-gray-950 border-t border-gray-800 py-10">
           <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
             <OrbitLogo dark />
-            <div className="flex gap-8">
+            <div className="flex gap-8 flex-wrap justify-center">
               {["How it works", "Products", "Get started"].map((l) => (
                 <a
                   key={l}
@@ -528,6 +526,9 @@ export default function StaticCoLanding() {
                   {l}
                 </a>
               ))}
+              <a href="mailto:team@staticco.net" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
+                team@staticco.net
+              </a>
             </div>
             <span className="text-xs text-gray-700">© 2026 Static Co.</span>
           </div>

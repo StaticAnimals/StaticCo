@@ -149,6 +149,54 @@ export default function AuraQuestionnaire() {
   const input = "w-full px-4 py-2.5 rounded-lg border border-gray-200 bg-gray-50 text-sm text-gray-800 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all";
 
   const canProceed = () => (step === 0 ? !!(spaName && ownerName && email && location) : true);
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    try {
+      await fetch("https://formspree.io/f/mwvjbpjw", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: `Aura questionnaire - ${spaName}`,
+          source: "Aura questionnaire",
+          spa_name: spaName,
+          owner_name: ownerName,
+          email,
+          phone,
+          location,
+          staff,
+          providers,
+          treatments: selectedTreatments.join(", "),
+          top_treatment: topTreatment,
+          rebook_cycles: rebookCycles,
+          consent: tracksConsent,
+          client_count: clientCount,
+          ticket_size: ticketSize,
+          lead_sources: selectedLeadSources.join(", "),
+          memberships: hasMemberships,
+          membership_detail: membershipDetail,
+          churn_window: churnWindow,
+          followup_method: followupMethod,
+          booking_software: bookingSoftware,
+          software_frustration: softwareFrustration,
+          intake_fields: selectedIntakeFields.join(", "),
+          photo_method: photoMethod,
+          other_tools: selectedOtherTools.join(", "),
+          priorities: selectedPriorities.join(", "),
+          win_definition: winDefinition,
+          budget,
+          timeline,
+          anything_else: anythingElse,
+        }),
+      });
+      setSubmitted(true);
+    } catch {
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (submitted) {
     return (
@@ -359,7 +407,7 @@ export default function AuraQuestionnaire() {
           {step < steps.length - 1 ? (
             <button onClick={() => { if (canProceed()) setStep((s) => s + 1); }} className={`bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-all ${!canProceed() ? "opacity-50 cursor-not-allowed" : "hover:-translate-y-0.5"}`}>Continue</button>
           ) : (
-            <button onClick={() => setSubmitted(true)} className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-all hover:-translate-y-0.5">Submit</button>
+            <button onClick={handleSubmit} disabled={submitting} className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-all hover:-translate-y-0.5 disabled:opacity-50">{submitting ? "Sending..." : "Submit"}</button>
           )}
         </div>
       </div>

@@ -22,6 +22,38 @@ export default function OtherQuestionnaire() {
 
   const budgetOptions = ["Under $100/mo", "$100-$200/mo", "$200-$350/mo", "$350+/mo", "Flexible if it delivers"];
   const canSubmit = businessName && ownerName && email && describe;
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!canSubmit) return;
+    setSubmitting(true);
+    try {
+      await fetch("https://formspree.io/f/mwvjbpjw", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: `General inquiry - ${businessName}`,
+          source: "Other questionnaire",
+          business_name: businessName,
+          owner_name: ownerName,
+          email,
+          phone,
+          industry,
+          describe,
+          client_flow: clientFlow,
+          repeat_pattern: repeatPattern,
+          biggest_problem: biggestProblem,
+          current_tools: currentTools,
+          budget,
+        }),
+      });
+      setSubmitted(true);
+    } catch {
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (submitted) {
     return (
@@ -120,7 +152,7 @@ export default function OtherQuestionnaire() {
 
         <div className="flex items-center justify-between pt-6 border-t border-gray-100">
           <Link href="/questionnaire" className="text-sm text-gray-500 hover:text-gray-800 transition-colors border-b border-gray-200 hover:border-gray-500 pb-0.5">Back</Link>
-          <button onClick={() => { if (canSubmit) setSubmitted(true); }} disabled={!canSubmit} className={`bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-all ${!canSubmit ? "opacity-50 cursor-not-allowed" : "hover:-translate-y-0.5"}`}>Submit</button>
+          <button onClick={handleSubmit} disabled={!canSubmit || submitting} className={`bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-all ${!canSubmit ? "opacity-50 cursor-not-allowed" : "hover:-translate-y-0.5"}`}>{submitting ? "Sending..." : "Submit"}</button>
         </div>
       </div>
     </>

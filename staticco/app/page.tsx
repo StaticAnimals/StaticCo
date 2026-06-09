@@ -270,13 +270,17 @@ export default function StaticCoLanding() {
           from { transform: rotate(65deg); }
           to   { transform: rotate(-295deg); }
         }
+        @keyframes bgOrbitA { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+        @keyframes bgOrbitB { from { transform: translate(-50%,-50%) rotate(65deg); } to { transform: translate(-50%,-50%) rotate(-295deg); } }
+        @keyframes bgOrbitC { from { transform: translate(-50%,-50%) rotate(130deg); } to { transform: translate(-50%,-50%) rotate(-230deg); } }
+        @keyframes bgOrbitD { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(-360deg); } }
         .sora { font-family: 'Sora', sans-serif; }
       `}</style>
 
-      <div className="bg-white min-h-screen text-gray-900 antialiased">
+      <div className="bg-blue-50/50 min-h-screen text-gray-900 antialiased">
 
         {/* ── NAV ─────────────────────────────────────────────────────────── */}
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${scrolled ? "bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm" : "bg-transparent"}`}>
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${scrolled ? "bg-blue-50/90 backdrop-blur-sm border-b border-blue-100 shadow-sm" : "bg-transparent"}`}>
           <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <OrbitLogo />
             <div className="hidden md:flex items-center gap-8">
@@ -294,7 +298,29 @@ export default function StaticCoLanding() {
         </nav>
 
         {/* ── HERO ─────────────────────────────────────────────────────────── */}
-        <section className="max-w-6xl mx-auto px-6 pt-28 pb-20 md:pt-32">
+        <section className="relative overflow-hidden">
+          {/* animated orbit background */}
+          <div
+            className="absolute pointer-events-none"
+            style={{ top: "42%", left: "64%", width: "1000px", height: "1000px" }}
+            aria-hidden="true"
+          >
+            <div style={{ position: "absolute", top: "50%", left: "50%", width: "18px", height: "18px", borderRadius: "50%", background: "#111827", opacity: 0.18, transform: "translate(-50%,-50%)" }} />
+            <div style={{ position: "absolute", top: "50%", left: "50%", width: "1000px", height: "1000px", marginTop: "-500px", marginLeft: "-500px", borderRadius: "50%", border: "1.5px solid rgba(17,24,39,0.06)", animation: "bgOrbitD 26s linear infinite" }}>
+              <div style={{ position: "absolute", top: "-4px", left: "50%", width: "8px", height: "8px", borderRadius: "50%", background: "#111827", opacity: 0.14, transform: "translateX(-50%)" }} />
+            </div>
+            <div style={{ position: "absolute", top: "50%", left: "50%", width: "720px", height: "720px", marginTop: "-360px", marginLeft: "-360px", borderRadius: "50%", border: "1.5px solid rgba(17,24,39,0.09)", animation: "bgOrbitC 18s linear infinite" }}>
+              <div style={{ position: "absolute", top: "-4px", left: "50%", width: "9px", height: "9px", borderRadius: "50%", background: "#111827", opacity: 0.18, transform: "translateX(-50%)" }} />
+            </div>
+            <div style={{ position: "absolute", top: "50%", left: "50%", width: "480px", height: "480px", marginTop: "-240px", marginLeft: "-240px", borderRadius: "50%", border: "1.5px solid rgba(17,24,39,0.13)", animation: "bgOrbitB 12s linear infinite" }}>
+              <div style={{ position: "absolute", top: "-5px", left: "50%", width: "10px", height: "10px", borderRadius: "50%", background: "#111827", opacity: 0.24, transform: "translateX(-50%)" }} />
+            </div>
+            <div style={{ position: "absolute", top: "50%", left: "50%", width: "280px", height: "280px", marginTop: "-140px", marginLeft: "-140px", borderRadius: "50%", border: "1.5px solid rgba(17,24,39,0.18)", animation: "bgOrbitA 7s linear infinite" }}>
+              <div style={{ position: "absolute", top: "-6px", left: "50%", width: "12px", height: "12px", borderRadius: "50%", background: "#111827", opacity: 0.32, transform: "translateX(-50%)" }} />
+            </div>
+          </div>
+
+          <div className="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-20 md:pt-32">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
 
             {/* Left: copy */}
@@ -350,6 +376,7 @@ export default function StaticCoLanding() {
             <div className="hidden md:block">
               <HeroVisual />
             </div>
+          </div>
           </div>
         </section>
 

@@ -170,8 +170,8 @@ function HeroVisual() {
       {/* mini CRM card */}
       <div className="relative">
         {/* annotation arrow */}
-        <div className="absolute -right-2 -top-7 flex items-center gap-1">
-          <span className="text-[10px] text-slate-400 italic">knows your client cycles</span>
+        <div className="absolute -right-2 -top-2 flex items-center gap-1">
+          <span className="text-[10px] text-slate-400 italic bg-blue-50/80 px-1 rounded">knows your client cycles</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M8 2 Q14 8 8 14" stroke="#94a3b8" strokeWidth="1" fill="none" strokeDasharray="2 2" />
             <path d="M6 11 L8 14 L11 12" stroke="#94a3b8" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />

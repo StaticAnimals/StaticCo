@@ -436,7 +436,7 @@ export default function StaticCoLanding() {
                   ))}
                 </ul>
                 <a
-                  href="/questionnaire"
+                  href="/questionnaire/aura"
                   className="inline-block bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all hover:-translate-y-0.5"
                 >
                   Get started with Aura →
